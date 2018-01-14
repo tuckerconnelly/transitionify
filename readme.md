@@ -1,6 +1,6 @@
 # transitionify
 
-minimal library to add and remove your component from the dom after a css transition. best when used with [styled-jsx](https://github.com/zeit/styled-jsx)
+minimal library to add and remove your component from the dom after a css transition. best when used with [styled-jsx](https://github.com/zeit/styled-jsx).
 
 ## usage
 
@@ -13,7 +13,7 @@ import transitionify from 'transitionify'
 
 // transitionify this component: it'll receive an "active"
 // prop that lets you add an ".active" class for the css
-// transition
+// transition.
 
 const MyChildComponent = transitionify()(({active}) =>
   <div className={active && 'active'}>
@@ -32,8 +32,8 @@ const MyChildComponent = transitionify()(({active}) =>
   </div>
 )
 
-// now in render() below, <MyChildComponent /> will actually
-// be removed from the DOM after 300ms (the default duration).
+// in render() below, <MyChildComponent /> will be removed
+// from the DOM after 300ms (the default duration).
 
 class MyParentComponent extends React.Component {
   state = {childComponentShown: false}
@@ -54,6 +54,6 @@ class MyParentComponent extends React.Component {
 
 ## api
 
-### transitionify({duration = 3000})
+### transitionify({duration = 300})
 
 duration - the duration in ms to wait to remove the element from the dom, when active goes from true -> false
