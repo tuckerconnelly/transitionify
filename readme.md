@@ -33,7 +33,8 @@ const MyChildComponent = transitionify()(({active}) =>
 )
 
 // in render() below, <MyChildComponent /> will be removed
-// from the DOM after 300ms (the default duration).
+// from the DOM after 300ms (the default duration) when
+// it's "active" prop goes from true -> false.
 
 class MyParentComponent extends React.Component {
   state = {childComponentShown: false}
