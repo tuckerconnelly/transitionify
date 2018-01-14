@@ -54,6 +54,6 @@ class MyParentComponent extends React.Component {
 
 ## api
 
-### transitionify({duration = 300})
+### transitionify({duration = 300})()
 
 duration - the duration in ms to wait to remove the element from the dom, when active goes from true -> false
