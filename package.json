@@ -46,10 +46,13 @@
     "eslint-plugin-standard": "^2.1.1",
     "husky": "^0.13.3",
     "lint-staged": "^3.4.0",
-    "prettier-standard": "^2.0.2"
+    "prettier-standard": "^2.0.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "babel": {
     "presets": [

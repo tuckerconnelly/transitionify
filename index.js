@@ -1,13 +1,14 @@
-const PropTypes = require('prop-types').default
+const React = require('react')
+const PropTypes = require('prop-types')
 
-module.exports = function transition ({ duration = 300 } = {}) {
-  return Component =>
-    class extends React.Component {
-      static propTypes = {
-        active: PropTypes.bool
+module.exports = function transitionify ({ duration = 300 } = {}) {
+  return Component => {
+    class Transitionified extends React.Component {
+      constructor (props) {
+        super(props)
+
+        this.state = {shown: props.active, active: props.active}
       }
-
-      state = {shown: this.props.active, active: this.props.active}
 
       componentWillReceiveProps (nextProps) {
         // If activating
@@ -26,9 +27,27 @@ module.exports = function transition ({ duration = 300 } = {}) {
         }
       }
       render () {
-        const {...other} = this.props
-        if (!this.state.shown) return <div />
-        return <Component {...other} active={this.state.active} />
+        if (!this.state.shown) {
+          return React.createElement('div')
+        }
+
+        return (
+          React.createElement(
+            Component,
+            Object.assign(
+              {},
+              this.props,
+              {active: this.state.active}
+            )
+          )
+        )
       }
     }
+
+    Transitionified.propTypes = {
+      active: PropTypes.bool
+    }
+
+    return Transitionified
+  }
 }
