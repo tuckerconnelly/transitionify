@@ -1,6 +1,6 @@
 {
   "name": "transitionify",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "minimal library to add and remove your component from the dom after a css transition",
   "main": "index.js",
   "scripts": {
