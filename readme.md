@@ -55,6 +55,7 @@ class MyParentComponent extends React.Component {
 
 ## api
 
-### transitionify({duration = 300})(YourComponent)
+### transitionify({duration = 300, activeProp = 'active'})(YourComponent)
 
 duration - the duration in ms to wait to remove the element from the dom, when active goes from true -> false
+useChildren - use "children" as the activation prop

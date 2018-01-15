@@ -1,27 +1,29 @@
 const React = require('react')
 const PropTypes = require('prop-types')
 
-module.exports = function transitionify ({ duration = 300 } = {}) {
+module.exports = function transitionify ({ duration = 300, useChildren = false } = {}) {
+  const activeProp = useChildren ? 'children' : 'active'
+
   return Component => {
     class Transitionified extends React.Component {
       constructor (props) {
         super(props)
 
-        this.state = {shown: props.active, active: props.active}
+        this.state = {shown: props[activeProp], active: !!props[activeProp], children: props.children}
       }
 
       componentWillReceiveProps (nextProps) {
         // If activating
-        if (!this.props.active && nextProps.active) {
-          this.setState({shown: true})
+        if (!this.props[activeProp] && nextProps[activeProp]) {
+          this.setState({shown: true, children: nextProps.children})
           // Wait for render of {shown: true, active: false}, THEN set active: true,
           // to trigger transition animation
           setTimeout(() => this.setState({active: true}))
         // If DEactivating
-        } else if (this.props.active && !nextProps.active) {
+        } else if (this.props[activeProp] && !nextProps[activeProp]) {
           this.setState({active: false})
           setTimeout(
-            () => this.setState({shown: false}),
+            () => this.setState({shown: false, children: nextProps.children}),
             duration
           )
         }
@@ -37,7 +39,7 @@ module.exports = function transitionify ({ duration = 300 } = {}) {
             Object.assign(
               {},
               this.props,
-              {active: this.state.active}
+              {active: this.state.active, children: this.state.children}
             )
           )
         )
@@ -45,7 +47,9 @@ module.exports = function transitionify ({ duration = 300 } = {}) {
     }
 
     Transitionified.propTypes = {
-      active: PropTypes.bool
+      // eslint-disable-next-line react/no-unused-prop-types
+      [activeProp]: PropTypes.bool,
+      children: PropTypes.node
     }
 
     return Transitionified
