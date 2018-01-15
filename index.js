@@ -26,6 +26,8 @@ module.exports = function transitionify ({ duration = 300, useChildren = false }
             () => this.setState({shown: false, children: nextProps.children}),
             duration
           )
+        } else if (this.props.children !== nextProps.children) {
+          this.setState({children: nextProps.children})
         }
       }
       render () {
